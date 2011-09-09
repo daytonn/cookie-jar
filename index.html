@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+ <head>
+	<meta charset="UTF-8" />
+	<script src="cookie.js"></script>
+	<title>Cookie</title>
+</head>
+<body>
+	<script>
+		var cookiejar = new CookieJar();
+		cookiejar.add('Baz', 'WTF');
+		console.log(cookiejar.get('Baz'));
+		var cookie = new Cookie({ name: 'Foo', value: 'Bar', autoSet: true });
+		console.log(cookie.get());
+	</script>
+</body>
+</html>
