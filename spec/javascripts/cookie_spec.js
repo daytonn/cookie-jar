@@ -1,12 +1,14 @@
 describe("Cookie", function() {
-  it("should exist", function() {
-    expect(Cookie).toBeDefined();
-  });
 
-  describe("Instantiation", function() {
+  describe("Instantiation:", function() {
     var cookie;
+
     beforeEach(function() {
       cookie = new Cookie({ name: 'My Cookie', value: 'some value' });
+    });
+    
+    afterEach(function() {
+      cookie = undefined;
     });
 
     it("should require a name", function() {
@@ -15,23 +17,7 @@ describe("Cookie", function() {
       }).toThrow("new Cookie({ name: 'Foo', value: 'Bar' }): name is undefined.");
     });
 
-    it("should have a get method", function() {
-      expect(cookie.get).toBeDefined();
-    });
-
-    it("should have a set method", function() {
-      expect(cookie.set).toBeDefined();
-    });
-
-    it("should have a remove method", function() {
-      expect(cookie.remove).toBeDefined();
-    });
-
-    it ('should have a to_string method', function() {
-      expect(cookie.to_string).toBeDefined();
-    });
-
-    describe('When using autoSet', function() {
+    describe('When using autoSet:', function() {
 
       it ('should throw an error if value is not defined', function() {
         expect(function() {
@@ -43,11 +29,16 @@ describe("Cookie", function() {
 
   });
 
-  describe("Usage", function() {
+  describe("Usage:", function() {
     var cookie;
 
     beforeEach(function() {
       cookie = new Cookie({ name: 'My Cookie', value: 'Foo' });
+      (new Cookie({ name: 'My Cookie' })).remove();
+    });
+
+    afterEach(function() {
+      cookie = undefined;
     });
 
     it("should set a cookie", function() {
@@ -57,12 +48,24 @@ describe("Cookie", function() {
     });
 
     it("should get a cookie", function() {
+      cookie.set();
       expect(cookie.get()).toEqual('Foo');
     });
 
     it("should remove a cookie", function() {
+      cookie.set();
       cookie.remove();
       expect(cookie.get()).toBeUndefined();
     });
+  });
+
+  describe("Class methods:", function() {
+    
+    // it("should remove a cookie", function() {
+    //       Cookie.remove('My Cookie');
+    //       expect(document.cookie.match(/My Cookie/)).toBeFalsy();
+    //       expect(document.cookie.match(/Foo/)).toBeFalsy();
+    //     });
+        
   });
 });
